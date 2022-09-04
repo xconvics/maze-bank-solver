@@ -10,7 +10,10 @@
 </head>
 <body>
 
+    <button class="settings-btn" data-settings-btn><img src="icons/gear-fill.svg"></button>
+
     <div class="container">
+
         <div class="inputs flex-column-between">
         
             <div class="flow-between">
@@ -80,6 +83,21 @@
 
         <button data-hack>HACK</button>
     </div>
+
+    <div class="modal hidden" data-settings>
+        <div class="modal-bg" data-settings-bg></div>
+        <div class="modal-text">
+            <span class="modal-header span-all">Settings</span>
+            Addition sign: <input type="text" data-add-sign>
+            Subtraction sign: <input type="text" data-sub-sign>
+            Multiplication sign: <input type="text" data-mult-sign>
+            Division sign: <input type="text" data-div-sign>
+            Max number: <input type="text" data-max-number>
+            <span class="span-all">(^ greatly increases solving time)</span>
+            <button class="span-all" data-settings-save>Save</button>
+        </div>
+    </div>
+    
 
 </body>
 </html>

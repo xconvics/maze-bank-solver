@@ -17,10 +17,21 @@ const inputs = [
     [0, 0, 0]
 ]
 
-const addSign = "+";
-const subSign = "-";
-const multSign = "x";
-const divSign = ":";
+let addSign;
+let subSign;
+let multSign;
+let divSign;
+let maxNumber;
+
+
+const loadStorage = () => {
+    addSign = localStorage.getItem("addSign") || "+";
+    subSign = localStorage.getItem("subSign") || "-";
+    multSign = localStorage.getItem("multSign") || "x";
+    divSign = localStorage.getItem("divSign") || ":";
+    maxNumber = Number(localStorage.getItem("maxNumber")) || 10;
+}
+loadStorage();
 
 // // TODO: remove
 // resultsHorizontal[0].value = 9;
@@ -58,6 +69,12 @@ const operation = (sign) => {
         case divSign:
             return (a, b) => a / b;
     }
+}
+
+const validateInputs = () => {
+    return [...signsHorizontal, ... signsVertical].every((sign) => {
+        return sign === addSign || sign === subSign || sign === multSign || sign === divSign;
+    })
 }
 
 const initHack = () => {
@@ -118,6 +135,10 @@ const validate = (validators, inputs) => {
 
 
 const hack = async () => {
+    if(!validateInputs()) {
+        alert(`Input signs must be one of the following: ${addSign}, ${subSign}, ${multSign}, ${divSign}`);
+        return;
+    }
     initHack();
 
     console.log("STARTING...")
@@ -157,7 +178,7 @@ bruteforceRecursive = (inputs, col, row) => {
         nextRow += 1
     }
 
-    while(nextRow < 3 && newInputs[col][row] < 11) {
+    while(nextRow < 3 && newInputs[col][row] <= maxNumber) {
         newInputs[col][row] = newInputs[col][row] + 1;
 
         if(validate(validators, newInputs)) {
@@ -186,4 +207,41 @@ resultsVertical.forEach((result, index) => {
 });
 resultsVerticalCopy.forEach((result, index) => {
     result.addEventListener("input", () => { resultsVertical[index].value = result.value })
+});
+
+// SETTINGS
+const settings = document.querySelector("[data-settings]");
+const settings_btn = document.querySelector("[data-settings-btn]");
+const settings_bg = document.querySelector("[data-settings-bg]");
+const settings_save = document.querySelector("[data-settings-save]");
+
+const addSignInput = document.querySelector("[data-add-sign]");
+const subSignInput = document.querySelector("[data-sub-sign]");
+const multSignInput = document.querySelector("[data-mult-sign]");
+const divSignInput = document.querySelector("[data-div-sign]");
+const maxNumberInput = document.querySelector("[data-max-number]");
+
+addSignInput.value = addSign;
+subSignInput.value = subSign;
+multSignInput.value = multSign;
+divSignInput.value = divSign;
+maxNumberInput.value = maxNumber;
+
+
+settings_btn.addEventListener("click", () => {
+    settings.classList.toggle("hidden");
+});
+settings_bg.addEventListener("click", () => {
+    settings.classList.add("hidden");
+});
+settings_save.addEventListener("click", () => {
+    localStorage.setItem("addSign", addSignInput.value);
+    localStorage.setItem("subSign", subSignInput.value);
+    localStorage.setItem("multSign", multSignInput.value);
+    localStorage.setItem("divSign", divSignInput.value);
+    localStorage.setItem("maxNumber", maxNumberInput.value);
+
+    loadStorage();
+
+    settings.classList.add("hidden");
 });

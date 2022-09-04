@@ -33,12 +33,12 @@ body {
     flex-direction: column;
 }
 
-input, .spacer {
+.inputs input, .inputs .spacer {
     width: 5rem;
     height: 5rem;
 }
 
-input {
+.inputs input {
     display: block;
     border-radius: 0.5rem;
     border-width: 2px;
@@ -48,28 +48,27 @@ input {
     padding: auto;
 }
 
-input[type="number"]:not([disabled]) {
+.inputs input[type="number"]:not([disabled]) {
     background-color: #225148;
     border-color: #519f90;
 }
 
-input[disabled] {
+.inputs input[disabled] {
     background-color: #262626;
     border-color: #9f9f9f;
 }
 
-input[type="text"] {
+.inputs input[type="text"] {
     background-color: #3c3152;
     border-color: #614e85;
 }
 
-input[type='number']::-webkit-inner-spin-button, 
-input[type='number']::-webkit-outer-spin-button { 
+.inputs input[type='number']::-webkit-inner-spin-button, 
+.inputs input[type='number']::-webkit-outer-spin-button { 
     -webkit-appearance: none;
     margin: 0;
 }
-
-button {
+.container button, .modal button {
     width: 100%;
     height: 4rem;
     font-size: 1.5rem;
@@ -80,4 +79,65 @@ button {
     border-style: solid;
     border-width: 2px;
     border-radius: 1rem;
+}
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-text {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    row-gap: 0.5rem;
+    font-size: 1.5rem;
+    flex-direction: column;
+    position: fixed;
+    width: 600px;
+    background-color: #353535;
+    padding: 2rem 4rem;
+    border-radius: 2rem;
+}
+.modal-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.span-all {
+    grid-column: 1 / -1;
+}
+.text-center {
+    text-align: center;
+}
+.modal-header {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.modal input {
+    background-color: #262626;
+    border-color: #9f9f9f;
+    border-style: solid;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+.hidden {
+    display: none;
+}
+
+.settings-btn {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    width: 4rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
