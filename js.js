@@ -10,11 +10,6 @@ let horizontalValidators = []
 let verticalValidators = []
 let validators = []
 
-// const inputs = [
-//     [3, 4, 2],
-//     [4, 1, 3],
-//     [2, 5, 1]
-// ]
 
 const inputs = [
     [0, 0, 0],
@@ -122,25 +117,31 @@ const validate = (validators, inputs) => {
 }
 
 
-const hack = () => {
+const hack = async () => {
     initHack();
 
     console.log("STARTING...")
 
-    const solved = bruteforceRecursive(inputs, 0, 0);
+    button.textContent = "HACKING...";
 
-    console.log("DONE")
-    console.log(solved)
+    setTimeout(async () => {
+        const solved = bruteforceRecursive(inputs, 0, 0);
 
-    if(typeof solved === "object") {
-        console.log("SOLVED");
-        solved.forEach((arr, i) => arr.forEach((output, j) => {
-            outputs[i * 3 + j].value = output;
-        })); 
-    } else {
-        console.log("FAILED TO SOLVE");
-        alert("Failed to solve");
-    }
+        console.log("DONE")
+        console.log(solved)
+    
+        if(typeof solved === "object") {
+            console.log("SOLVED");
+            solved.forEach((arr, i) => arr.forEach((output, j) => {
+                outputs[i * 3 + j].value = output;
+            })); 
+        } else {
+            console.log("FAILED TO SOLVE");
+            alert("Failed to solve");
+        }
+    
+        button.textContent = "HACK";
+    })
     
 }
 
@@ -156,7 +157,7 @@ bruteforceRecursive = (inputs, col, row) => {
         nextRow += 1
     }
 
-    while(nextRow < 3 && newInputs[col][row] < 10) {
+    while(nextRow < 3 && newInputs[col][row] < 11) {
         newInputs[col][row] = newInputs[col][row] + 1;
 
         if(validate(validators, newInputs)) {
@@ -168,6 +169,8 @@ bruteforceRecursive = (inputs, col, row) => {
         const got = bruteforceRecursive(newInputs, nextCol, nextRow);
         if(typeof got === "object") return got;
     }
+    
+    
 }
 
 button.addEventListener("click", hack);
