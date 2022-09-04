@@ -29,7 +29,7 @@ const loadStorage = () => {
     subSign = localStorage.getItem("subSign") || "-";
     multSign = localStorage.getItem("multSign") || "x";
     divSign = localStorage.getItem("divSign") || ":";
-    maxNumber = Number(localStorage.getItem("maxNumber")) || 10;
+    maxNumber = Number(localStorage.getItem("maxNumber")) || 11;
 }
 loadStorage();
 
@@ -172,6 +172,11 @@ bruteforceRecursive = (inputs, col, row) => {
         return arr.slice();
     });
 
+    if(col == 2 && row == 2 && newInputs[col][row] > 0) {
+        console.log(JSON.stringify(newInputs))
+    }
+
+
     let nextCol = col + 1;
     let nextRow = row;
     if(nextCol > 2) {
@@ -179,7 +184,7 @@ bruteforceRecursive = (inputs, col, row) => {
         nextRow += 1
     }
 
-    while(nextRow < 3 && newInputs[col][row] <= maxNumber) {
+    while(newInputs[col][row] < maxNumber) {
         newInputs[col][row] = newInputs[col][row] + 1;
 
         if(validate(validators, newInputs)) {
@@ -188,10 +193,11 @@ bruteforceRecursive = (inputs, col, row) => {
             return newInputs;
         }
 
-        const got = bruteforceRecursive(newInputs, nextCol, nextRow);
-        if(typeof got === "object") return got;
+        if(nextRow < 3) {
+            const got = bruteforceRecursive(newInputs, nextCol, nextRow);
+            if(typeof got === "object") return got;
+        }   
     }
-    
     
 }
 
