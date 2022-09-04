@@ -137,7 +137,7 @@ const validate = (validators, inputs) => {
 
 const hack = async () => {
     if(!validateInputs()) {
-        alert(`Input signs must be one of the following: ${addSign}, ${subSign}, ${multSign}, ${divSign}\nYou can chenge them in setting (left upper corner)`);
+        alert(`Operation signs must be one of the following: ${addSign}, ${subSign}, ${multSign}, ${divSign}\nYou can change them in setting (left upper corner)`);
         return;
     }
     initHack();
