@@ -72,7 +72,8 @@ const operation = (sign) => {
 }
 
 const validateInputs = () => {
-    return [...signsHorizontal, ... signsVertical].every((sign) => {
+    return [...signsHorizontal, ... signsVertical].every((signInput) => {
+        const sign = signInput.value;
         return sign === addSign || sign === subSign || sign === multSign || sign === divSign;
     })
 }
@@ -136,7 +137,7 @@ const validate = (validators, inputs) => {
 
 const hack = async () => {
     if(!validateInputs()) {
-        alert(`Input signs must be one of the following: ${addSign}, ${subSign}, ${multSign}, ${divSign}`);
+        alert(`Input signs must be one of the following: ${addSign}, ${subSign}, ${multSign}, ${divSign}\nYou can chenge them in setting (left upper corner)`);
         return;
     }
     initHack();
