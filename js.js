@@ -150,7 +150,6 @@ const hack = async () => {
         const solved = bruteforceRecursive(inputs, 0, 0);
 
         console.log("DONE")
-        console.log(solved)
     
         if(typeof solved === "object") {
             console.log("SOLVED");
@@ -171,11 +170,6 @@ bruteforceRecursive = (inputs, col, row) => {
     const newInputs = inputs.map((arr) => {
         return arr.slice();
     });
-
-    if(col == 2 && row == 2 && newInputs[col][row] > 0) {
-        console.log(JSON.stringify(newInputs))
-    }
-
 
     let nextCol = col + 1;
     let nextRow = row;
