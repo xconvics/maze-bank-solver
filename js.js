@@ -29,7 +29,7 @@ const loadStorage = () => {
     subSign = localStorage.getItem("subSign") || "-";
     multSign = localStorage.getItem("multSign") || "x";
     divSign = localStorage.getItem("divSign") || ":";
-    maxNumber = Number(localStorage.getItem("maxNumber")) || 11;
+    maxNumber = Number(localStorage.getItem("maxNumber")) || 9;
 }
 loadStorage();
 
